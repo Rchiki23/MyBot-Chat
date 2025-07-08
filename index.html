@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MyBot 💬</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">🤖 MyBot- The Cute Era</div>
+
+    <div class="chat-box" id="chat-box">
+      <!-- Messages appear here -->
+    </div>
+
+    <div class="chat-input-area">
+      <input type="text" id="user-input" placeholder="Type your drama here..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const msg = input.value.trim();
+      if (msg === "") return;
+
+      const lower = msg.toLowerCase();
+      const chatBox = document.getElementById("chat-box");
+
+      // Add user message
+      const userMsg = `<div class="user-message">🧍‍♀️ You: ${msg}</div>`;
+      chatBox.innerHTML += userMsg;
+
+      let reply = "";
+
+      const greetings = ["hello", "hi", "hey", "yo"];
+      if (greetings.some(greet => lower.includes(greet))) {
+        const greetReplies = [
+          "Heyyy, aaj ka din kaisa gaya re legend?",
+          "Hello! kya haal??",
+          "Hey Cutiee Chal bata kya haal hai?",
+          "Yes Habibiiiiiiii, Kya Bolti Publiccc?"
+        ];
+        reply = greetReplies[Math.floor(Math.random() * greetReplies.length)];
+      } else if (lower.includes("sad") || lower.includes("depress")) {
+        const sadReplies = [
+          "Tu sad hai? ",
+          "Chal uth, stress ko left swipe maar 💅",
+          "Kha le kuch meetha, dopamine khush hoga 💖",
+          "Main hoon na. Tu mast hai, bas bhool gayi thodi der ko."
+        ];
+        reply = sadReplies[Math.floor(Math.random() * sadReplies.length)];
+      } else if (lower.includes("stress") || lower.includes("tired") || lower.includes("anxious")) {
+        const stressReplies = [
+          "Tu stress leke kya karegi? Thoda chill maar!",
+          "Deep breath le... aur chocolate ka soch 🍫",
+          "Tension lene ka kaam MyBot pe chhod de 😌"
+        ];
+        reply = stressReplies[Math.floor(Math.random() * stressReplies.length)];
+      } else {
+        const randomReplies = [
+        //   "Hmmm... chal bata, aaj kispe gussa aaya?",
+          "Sab Thikk ??",
+          "Main sun rahi hoon...",
+          "Aise msg bhejna bhi talent hai 😎"
+        ];
+        reply = randomReplies[Math.floor(Math.random() * randomReplies.length)];
+      }
+
+      const botMsg = `<div class="bot-message">🤖 MyBot: ${reply}</div>`;
+      chatBox.innerHTML += botMsg;
+
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
